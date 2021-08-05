@@ -11,6 +11,7 @@ interface IDeTrust {
         uint nextReleaseTime;  // when would the money begin to release to beneficiary
         uint timeInterval;  // how often the money is going to release to beneficiary
         uint amountPerTimeInterval;  // how much can a beneficiary to get the money
+        bool isUSDBased; // is the release amount usd based or not
         uint totalAmount;  // total money in this trust
         bool revocable;  // is this trust revocable or irrevocable
     }
@@ -25,6 +26,7 @@ interface IDeTrust {
      * @param startReleaseTime will this trust start to release money, UTC in seconds
      * @param timeInterval how often can a beneficiary to get the money in seconds
      * @param amountPerTimeInterval how much can a beneficiary to get the money
+     * @param isUSDBased is the release amount usd based
      * @param totalAmount how much money are put in the trust
      * @param revocable whether this trust is revocalbe
      */
@@ -36,6 +38,7 @@ interface IDeTrust {
         uint startReleaseTime,
         uint timeInterval,
         uint amountPerTimeInterval,
+        bool isUSDBased,
         uint totalAmount,
         bool revocable
     );
@@ -127,6 +130,7 @@ interface IDeTrust {
                                UTC seconds
      * @param timeInterval how often the beneficiary can get money
      * @param amountPerTimeInterval how much money can beneficiary get after one timeInterval
+     * @param isUSDBased is the release amount usd based
      * @param totalAmount how much money is added to the trust
      * @param revocable whether this trust is revocable
      */
@@ -136,6 +140,7 @@ interface IDeTrust {
         uint startReleaseTime,
         uint timeInterval,
         uint amountPerTimeInterval,
+        bool isUSDBased,
         uint totalAmount,
         bool revocable
     )
@@ -151,6 +156,7 @@ interface IDeTrust {
                                UTC seconds
      * @param timeInterval how often the beneficiary can get money
      * @param amountPerTimeInterval how much money can beneficiary get after one timeInterval
+     * @param isUSDBased is the release amount usd based
      * @param revocable whether this trust is revocalbe
      */
     function addTrust(
@@ -159,6 +165,7 @@ interface IDeTrust {
         uint startReleaseTime,
         uint timeInterval,
         uint amountPerTimeInterval,
+        bool isUSDBased,
         bool revocable
     )
         external

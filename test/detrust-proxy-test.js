@@ -16,7 +16,8 @@ describe("DeTrust proxy", () => {
     beneficiary,
     beneficiary1,
     trustName,
-    revocable;
+    revocable,
+    isUSDBased;
 
   beforeEach(async () => {
     const DeTrust = await ethers.getContractFactory("DeTrust");
@@ -85,6 +86,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         totalAmount,
         revocable
       );
@@ -102,6 +104,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         revocable,
         overrides
       );
@@ -123,6 +126,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         initSendBalance / 2,
         revocable
       );
@@ -134,6 +138,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         initSendBalance / 2,
         revocable
       );
@@ -156,6 +161,7 @@ describe("DeTrust proxy", () => {
           startReleaseTime,
           timeInterval,
           amountPerTimeInterval,
+          isUSDBased,
           initSendBalance,
           revocable
         )
@@ -175,6 +181,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         initSendBalance / 2,
         revocable
       );
@@ -198,6 +205,7 @@ describe("DeTrust proxy", () => {
           startReleaseTime,
           timeInterval,
           amountPerTimeInterval,
+          isUSDBased,
           initSendBalance + 1,
           revocable
         )
@@ -227,6 +235,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         initSendBalance / 2,
         revocable
       );
@@ -248,6 +257,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         initSendBalance / 2,
         revocable
       );
@@ -259,6 +269,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         initSendBalance / 4,
         revocable
       );
@@ -283,6 +294,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         initSendBalance / 2,
         revocable
       );
@@ -294,6 +306,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         initSendBalance / 4,
         revocable
       );
@@ -324,6 +337,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         initSendBalance,
         revocable
       );
@@ -345,6 +359,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         amountPerTimeInterval,
         revocable
       );
@@ -366,6 +381,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         amountPerTimeInterval,
         revocable
       );
@@ -393,6 +409,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime + 1000,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         initSendBalance,
         revocable
       );
@@ -414,6 +431,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         amountPerTimeInterval,
         revocable
       );
@@ -435,6 +453,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         amountPerTimeInterval,
         revocable
       );
@@ -446,6 +465,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval * 2,
+        isUSDBased,
         amountPerTimeInterval * 2,
         revocable
       );
@@ -467,6 +487,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         amountPerTimeInterval,
         revocable
       );
@@ -492,6 +513,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         amountPerTimeInterval,
         revocable
       );
@@ -504,6 +526,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         amountPerTimeInterval,
         revocable
       );
@@ -516,6 +539,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime + 100,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         amountPerTimeInterval,
         revocable
       );
@@ -543,6 +567,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         initSendBalance,
+        isUSDBased,
         initSendBalance,
         revocable
       );
@@ -565,6 +590,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         amountPerTimeInterval,
         revocable
       );
@@ -577,6 +603,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         amountPerTimeInterval,
         revocable
       );
@@ -600,6 +627,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         amountPerTimeInterval,
         false
       );
@@ -623,6 +651,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         amountPerTimeInterval,
         false
       );
@@ -646,6 +675,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         amountPerTimeInterval,
         false
       );
@@ -669,6 +699,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         amountPerTimeInterval,
         true,
       );
@@ -688,6 +719,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - 10,
         timeInterval,
         initSendBalance,
+        isUSDBased,
         revocable,
         overrides
       );
@@ -708,6 +740,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - 10,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         revocable,
         overrides
       );
@@ -720,6 +753,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - 10,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         revocable,
         overrides
       );
@@ -746,6 +780,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime - timeInterval,
         timeInterval,
         amountPerTimeInterval,
+        isUSDBased,
         initSendBalance,
         revocable
       );
@@ -774,6 +809,7 @@ describe("DeTrust proxy", () => {
         startReleaseTime,
         3600,
         amountPerTimeInterval,
+        isUSDBased,
         initSendBalance,
         revocable
       );
@@ -794,10 +830,52 @@ describe("DeTrust proxy", () => {
           startReleaseTime,
           0,
           amountPerTimeInterval,
+          isUSDBased,
           revocable,
           overrides
         )
     ).to.be.revertedWith('timeInterval should be positive');
+  });
+
+  it("Should get isUSDBased success", async () => {
+    const overrides = { value: initSendBalance };
+    const usdBased = true;
+    await deTrust
+      .connect(addr1)
+      .addTrust(
+        trustName,
+        beneficiary.address,
+        startReleaseTime,
+        timeInterval,
+        amountPerTimeInterval,
+        usdBased,
+        revocable,
+        overrides);
+
+    const trusts = await deTrust.connect(addr1).getTrustListAsSettlor(
+      addr1.address);
+    expect(trusts[0].isUSDBased).to.equal(usdBased);
+  });
+
+  it("Should get usd based eth success", async () => {
+    const overrides = { value: initSendBalance };
+    await deTrust
+      .connect(addr1)
+      .addTrust(
+        trustName,
+        beneficiary.address,
+        startReleaseTime,
+        timeInterval,
+        amountPerTimeInterval,
+        true,
+        revocable,
+        overrides);
+
+    await expect(
+      await deTrust.connect(beneficiary).releaseAll()
+    ).to.be.revertedWith("Round not complete");
+    // changeEtherBalance(beneficiary, amountPerTimeInterval);
+
   });
 
 });

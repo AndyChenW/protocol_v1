@@ -3,10 +3,15 @@ pragma solidity 0.8.0;
 
 import "./interfaces/IDeTrust.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+
 
 contract DeTrust is IDeTrust, Initializable {
 
     uint private trustId;
+
+    AggregatorV3Interface internal priceFeed;
+
 
     /*
       Paid directly would be here.
@@ -34,6 +39,7 @@ contract DeTrust is IDeTrust, Initializable {
      */
     function initialize() external initializer {
         unlocked = 1;
+        priceFeed = AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e);
     }
 
     /**
@@ -99,6 +105,7 @@ contract DeTrust is IDeTrust, Initializable {
         uint startReleaseTime,
         uint timeInterval,
         uint amountPerTimeInterval,
+        bool isUSDBased,
         uint totalAmount,
         bool revocable
     )
@@ -120,6 +127,7 @@ contract DeTrust is IDeTrust, Initializable {
             startReleaseTime,
             timeInterval,
             amountPerTimeInterval,
+            isUSDBased,
             totalAmount,
             revocable
         );
@@ -131,6 +139,7 @@ contract DeTrust is IDeTrust, Initializable {
         uint startReleaseTime,
         uint timeInterval,
         uint amountPerTimeInterval,
+        bool isUSDBased,
         bool revocable
     )
         external
@@ -148,6 +157,7 @@ contract DeTrust is IDeTrust, Initializable {
             startReleaseTime,
             timeInterval,
             amountPerTimeInterval,
+            isUSDBased,
             totalAmount,
             revocable
         );
@@ -306,6 +316,7 @@ contract DeTrust is IDeTrust, Initializable {
         uint startReleaseTime,
         uint timeInterval,
         uint amountPerTimeInterval,
+        bool isUSDBased,
         uint totalAmount,
         bool revocable
     )
@@ -321,6 +332,7 @@ contract DeTrust is IDeTrust, Initializable {
         trusts[_id].nextReleaseTime = startReleaseTime;
         trusts[_id].timeInterval = timeInterval;
         trusts[_id].amountPerTimeInterval = amountPerTimeInterval;
+        trusts[_id].isUSDBased = isUSDBased;
         trusts[_id].totalAmount = totalAmount;
         trusts[_id].revocable = revocable;
 
@@ -335,6 +347,7 @@ contract DeTrust is IDeTrust, Initializable {
             startReleaseTime,
             timeInterval,
             amountPerTimeInterval,
+            isUSDBased,
             totalAmount,
             revocable
         );
@@ -349,6 +362,9 @@ contract DeTrust is IDeTrust, Initializable {
         }
         uint distributionAmount = (nowTimestamp - t.nextReleaseTime) / t.timeInterval + 1;
         uint releaseAmount = distributionAmount * t.amountPerTimeInterval;
+        if (t.isUSDBased) {
+            releaseAmount = releaseAmount / _getUSDPrice();
+        }
         if (releaseAmount >= t.totalAmount) {
             releaseAmount = t.totalAmount;
             t.totalAmount = 0;
@@ -357,6 +373,20 @@ contract DeTrust is IDeTrust, Initializable {
         t.totalAmount -= releaseAmount;
         t.nextReleaseTime += distributionAmount * t.timeInterval;
         return releaseAmount;
+    }
+
+    /**
+     * Returns the latest price
+     */
+    function _getUSDPrice() public view returns (uint) {
+        (
+            ,
+            int price,
+            ,
+            uint timeStamp,
+        ) = priceFeed.latestRoundData();
+        require(timeStamp > 0, "Round not complete");
+        return uint(price);
     }
 
 }
